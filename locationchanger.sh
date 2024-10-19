@@ -24,7 +24,7 @@ ts() {
 ID=`whoami`
 ts "I am '$ID'"
 
-SSID=`/usr/sbin/networksetup -getairportnetwork en0 | cut -d : -f 2- | sed 's/ //g'`
+SSID=`ipconfig getsummary en0 | awk -F ' SSID : '  '/ SSID : / {print $2}'`
 
 LOCATION_NAMES=`scselect | tail -n +2 | cut -d \( -f 2- | sed 's/)$//'`
 CURRENT_LOCATION=`scselect | tail -n +2 | egrep '^\ +\*' | cut -d \( -f 2- | sed 's/)$//'`
